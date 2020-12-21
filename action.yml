@@ -4,6 +4,21 @@ description: "GitHub action to apply black formatting + reorder-python-imports"
 branding:
   icon: "hexagon"
   color: "black"
+inputs:
+  path:
+    description: "File or directory to run black on."
+    required: false
+    default: "."
+  line-length:
+    description: "The number of characters allowed per line."
+    required: false
+    default: "120"
+outputs:
+  output:
+    description: "The output of black."
 runs:
   using: "docker"
   image: "Dockerfile"
+  args:
+    - ${{ inputs.line-length }}
+    - ${{ inputs.path }}
